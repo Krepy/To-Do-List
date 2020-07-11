@@ -4,7 +4,7 @@ from django.utils import timezone
 import datetime
 
 # Create your models here.
-class Notes(models.Model):
+class Note(models.Model):
     noteText = models.CharField(max_length=200)
     todoDate = models.DateField('todo date')
 
