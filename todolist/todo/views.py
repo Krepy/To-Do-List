@@ -70,3 +70,15 @@ class AddItemView(generic.edit.CreateView):
     def form_valid(self, form):
         print(form.cleaned_data)
         return super().form_valid(form)
+
+class NoteUpdateView(generic.edit.UpdateView):
+    form_class = NoteForm
+    template_name = 'todo/updateNote.html'
+
+    def get_object(self):
+        pk_ = self.kwargs.get("pk")
+        return get_object_or_404(Note, pk=pk_)
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
