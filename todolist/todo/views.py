@@ -54,6 +54,12 @@ class NoteDetailView(generic.DetailView):
         pk_ = self.kwargs.get("pk")
         return get_object_or_404(Note, pk=pk_)
 
+def NoteDelete(request, pk_):
+    get_object_or_404(Note, pk=pk_).delete()
+
+    return HttpResponseRedirect(reverse('todo:index'))
+
+
 class AddItemView(generic.edit.CreateView):
     form_class = NoteForm
     template_name = 'todo/addNote.html'

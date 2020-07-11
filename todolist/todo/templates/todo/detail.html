@@ -1,4 +1,9 @@
 <h1>Title: {{ note.noteTitle }}</h1>
 
-  <p><strong>Note Text:</strong> {{ note.noteText }}</p> <!-- author detail link not yet defined -->
-  <p><strong>To-Do At:</strong> {{ note.todoDate|date:"d  M  Y" }}</p>
+<p><strong>Note Text:</strong> {{ note.noteText }}</p> <!-- author detail link not yet defined -->
+<p><strong>To-Do At:</strong> {{ note.todoDate|date:"d  M  Y" }}</p>
+
+<form action="{% url 'todo:delete' note.id %}" method="post">
+{% csrf_token %}
+  <input type="submit" value="Delete">
+</form>
