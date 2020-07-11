@@ -6,6 +6,7 @@ from django.views import generic
 from django.utils import timezone
 
 from .models import Note
+from .forms import NoteForm
 # Create your views here.
 
 class IndexView(generic.ListView):
@@ -45,5 +46,21 @@ class ExpiredView(generic.ListView):
         ExpiredNotes = [note.id for note in Notes if note.isExpired()]
         return Note.objects.filter(id__in=ExpiredNotes).order_by('todoDate')
 
-def AddItemView(self):
-    return HttpResponse("Hello this is to add items to the to-do list.")
+class NoteDetailView(generic.DetailView):
+    template_name = 'todo/detail.html'
+    model = Note
+
+    def get_note(self):
+        pk_ = self.kwargs.get("pk")
+        return get_object_or_404(Note, pk=pk_)
+
+class AddItemView(generic.edit.CreateView):
+    form_class = NoteForm
+    template_name = 'todo/addNote.html'
+
+    def get_queryset(self):
+        return Note.objects.all()
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
