@@ -11,8 +11,8 @@ class Notes(models.Model):
     def __str__(self):
         return self.noteText
     def isToday(self):
-        return timezone.now().date() <= self.todoDate <= timezone.now().date() + datetime.timedelta(days = 1)
+        return timezone.now().date() == self.todoDate <= timezone.now().date()
     def isThisWeek(self):
-        return timezone.now().date() <= self.todoDate <= timezone.now().date() + datetime.timedelta(days = 7)
+        return timezone.now().date() <= self.todoDate <= timezone.now().date() + datetime.timedelta(days = 6)
     def isExpired(self):
-        return self.todoDate <= timezone.now().date()
+        return self.todoDate < timezone.now().date()
