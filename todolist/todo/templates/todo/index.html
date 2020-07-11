@@ -1,7 +1,7 @@
 {% if note_list %}
     <ul>
     {% for note in note_list %}
-        <li>{{ note.noteText }}</li>
+        <li><a href="{{ note.get_absolute_url }}">{{ note.noteTitle }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
